@@ -18,23 +18,25 @@ public class Board : MonoBehaviour
         float aspect = (float)Screen.width / Screen.height;
         float worldHeight = myCamera.orthographicSize * 2;
         float worldWidth = worldHeight * aspect;
-        gameObject.transform.position = new Vector3(-worldWidth / 2, 0);
-
-        spawnTrans = new Vector3(-worldWidth / 2, 0, 0);
+    
         numWidthPadding = width + 1;
         numHeightPadding = height + 1;
         widthPadding = worldWidth / numWidthPadding;
-        
-        spawnTrans.x += widthPadding;
-       
+        heightPadding = worldHeight / numHeightPadding;
+        spawnTrans = new Vector3(-worldWidth / 2 + widthPadding, -worldHeight / 2 + heightPadding, 0);
 
-        for (int i = 0; i < width; i++)
+        //spawnTrans.x += widthPadding;
+        //spawnTrans.y += heightPadding;
+
+        for (int i = 0; i < height; i++)
         {
-            for (int j = 0; j < height; j++)
+            for (int j = 0; j < width; j++)
             {
                 Instantiate(appleToSpawn, spawnTrans, Quaternion.identity);
                 spawnTrans.x += widthPadding;
             }
+            spawnTrans.x = -worldWidth / 2 + widthPadding;
+            spawnTrans.y += heightPadding;
         }
     }
 
